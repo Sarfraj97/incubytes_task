@@ -12,11 +12,33 @@ RSpec.describe 'main' do
     expect(Main.add("")).to eq(0)
   end
 
-  it 'returns single value when single value given' do
-    expect(Main.add("1")).to eq(1)
+  it 'handles new line instead of comma' do
+    expect(Main.add("1\n2,3")).to eq(6)
   end
 
   it 'handles deliminator' do
     expect(Main.add("//;\n2;2")).to eq(4)
+  end
+
+  it 'handles deliminator with more numbers' do
+    expect(Main.add("//;\n2;2;3;4;11")).to eq(22)
+  end
+
+  it 'handles deliminator with more numbers' do
+    expect(Main.add("//+\n2+2+3+4+11")).to eq(22)
+  end
+
+  it "handle negative numbers by raising error" do
+    expect { Main.add("1,-2,-3") }
+      .to(raise_error do |error|
+        expect(error.message).to eq "Negative numbers not allowed: -2,-3"
+      end)
+  end
+
+  it "handle negative numbers by raising error" do
+    expect { Main.add("1,-2") }
+      .to(raise_error do |error|
+        expect(error.message).to eq "Negative numbers not allowed: -2"
+      end)
   end
 end
