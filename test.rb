@@ -15,4 +15,8 @@ RSpec.describe 'main' do
   it 'returns single value when single value given' do
     expect(Main.add("1")).to eq(1)
   end
+
+  it 'handles deliminator' do
+    expect(Main.add("//;\n2;2")).to eq(4)
+  end
 end
