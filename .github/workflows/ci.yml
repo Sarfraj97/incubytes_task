@@ -24,4 +24,4 @@ jobs:
       - name: install
         run: gem install rspec
       - name: Rspec
-        run: rspec
+        run: rspec test.rb
